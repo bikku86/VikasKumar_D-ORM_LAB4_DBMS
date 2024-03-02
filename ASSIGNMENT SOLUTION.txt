@@ -23,10 +23,10 @@ select supp_id,supp_name,count(pro_id) as No_of_Products from supplier join supp
 
 7)Find the least expensive product from each category and print the table with category id, name, product name and price of the product.
 
-select cat_id,cat_name,pro_name,min(supp_price) as least_expensive_product from category join product using(cat_id) join supplier_pricing using(pro_id) group by cat_id;
+select cat_id,cat_name,pro_name,supp_price as least_expensive_product from category join product using(cat_id) join supplier_pricing using(pro_id) where(pro_id, supp_price) in (select pro_id,min(supp_price) from supplier_pricing group by pro_id);
 
 
-8) Display the Id and Name of the Product ordered after “2021-10-05”.
+8) Display the Id and Name of the Product ordered after â€œ2021-10-05â€.
 
 select pro_id,pro_name from product join supplier_pricing using(pro_id) join orders using(pricing_id) where ord_date > "2021-10-05";
 
@@ -37,7 +37,7 @@ select pro_id,pro_name from product join supplier_pricing using(pro_id) join ord
 select cus_name,cus_gender from customer where cus_name like 'A%' or cus_name like '%A';
 
 
-10) Create a stored procedure to display supplier id, name, Rating (Average rating of all the products sold by every customer) and  Type_of_Service. For Type_of_Service, If rating=5, print “Excellent Service”, If rating>4 print “GoodService”, If rating>2 print “Average Service” else print “Poor Service”. Note that there should be one rating per supplier. 
+10) Create a stored procedure to display supplier id, name, Rating (Average rating of all the products sold by every customer) and  Type_of_Service. For Type_of_Service, If rating=5, print â€œExcellent Serviceâ€, If rating>4 print â€œGoodServiceâ€, If rating>2 print â€œAverage Serviceâ€ else print â€œPoor Serviceâ€. Note that there should be one rating per supplier. 
 
 
 DELIMITER &&
